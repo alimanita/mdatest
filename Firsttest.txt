@@ -1,1 +1,48 @@
-Hello everyone
+Lors d’un entretien professionnel, ce que vous dites et comment vous le dites est impératif pour aider l’intervieweur à déterminer si vous êtes un bon candidat pour son entreprise et sa culture. Une des choses que vous pouvez faire pour vous aider à vous préparer à une entrevue est de bien réfléchir aux choses que vous ne voulez pas dire et aux choses dont vous voulez vous assurer qu’elles sont comprises par votre interlocuteur.
+
+Tout ce que vous dites lors d’un entretien d’embauche a le potentiel d’aider l’intervieweur à comprendre vos motivations pour postuler et comment vos compétences et votre expérience feraient de vous le candidat le plus qualifié pour le poste. Le maintien d’une attitude positive et professionnelle tout au long de l’entretien peut donner au responsable du recrutement la confiance en votre capacité à vous intégrer à la culture de l’entreprise et à ajouter de la valeur à l’entreprise.
+
+Voici quelques conseils sur les choses qu’un développeur ne doit absolument pas dire lors d’un entretien d’embauche.
+
+Ne montrez pas de réticences pour un langage X ou un framework Y
+Lorsqu’un intervieweur vous pose une question sur une technologie, une application, un logiciel ou un modèle de conception, c’est généralement parce que cela est important pour le poste pour lequel vous postulez. Critiquer un langage, une bibliothèque ou un cadre particulier montre un manque de flexibilité et une réticence potentielle à apprendre de nouvelles technologies. Ce genre de commentaire est souvent une ligne rouge pour l’intervieweur car il peut limiter le type ou le nombre de projets sur lesquels vous serez susceptible de travailler. L’objectif est d’être aussi flexible que possible, car on ne sait jamais quels types de projets ou d’opportunités peuvent se concrétiser plus tard.
+
+Se montrer trop prétentieux
+Il arrive souvent que l’on pense être un très bon développeur et de dire sans le penser des phrases comme “Tout le monde devrait écrire un bon code” ou “les reviews sont une perte de temps”.
+
+Attention, ce genre de phrase peut rebuter de nombreux recruteurs parce que cela montrerait des signes de prétentions et un manque de flexibilité et de connaissances d’un process “sain” au niveau du coding.  
+
+En effet, pour eux,  les “rewiews” de code ne sont pas là uniquement pour détecter les erreurs, ils servent également à partager les connaissances et à garantir que les normes et les exigences de codage sont respectées, et que donc vous deveniez un meilleur développeur.
+
+Vouloir être un “artiste” du coding
+Plusieurs développeurs préfèrent écrire de nouvelles fonctionnalités à partir de zéro plutôt que de corriger les bugs des autres, un peu comme un peintre qui débuterait sa toile de zéro au lieu de terminer et d’améliorer des toiles incomplètes d’autres peintres.
+
+Ce n’est pas parce que vous construisez un projet de zéro avec les meilleurs outils et les dernières technologies que vous faites un meilleur travail ou que vous êtes un meilleur développeur. Il n’y a pas meilleurs façon d’apprendre qu’en corrigeant les bugs (les siens ou ceux des autres) et faisant évoluer un code existant vers un meilleur code.
+
+Ne pas tester son code
+C’est très simple, pour un recruteur, un développeur qui ne teste pas son code n’est pas un développeur. Pour lui, vous créez et construisez votre code, il est donc logique de le tester.
+
+Bien sûr il ne vous sera jamais demandé d’être à la pointe des dernières technologies en la matière ou de développer un process très élaboré mais d’au moins avoir simplement testé son code et être sûr de lui.
+
+Ne pas avoir d’avis
+Si vous êtes familier avec plusieurs langages, ne soyez pas surpris que l’intervieweur vous interroge là dessus et vous demande lequel vous préférez. Pour lui, si vous avez déjà codé avec 2 ou plusieurs langages, vous devez en connaitre les avantages et les inconvénients et veut donc votre opinion là-dessus.
+
+Répondez de la manière la plus honnête possible et ayez un avis tranché. Car ne pas donner un avis tranché par rapport à une question de ce genre peut lui faire penser que vous ne les maîtrisez pas assez ou que pire encore vous ayez menti sur votre CV.
+
+Ne pas être curieux
+Apprendre une technologie juste parce que vous aviez dû l’utiliser dans votre travail est un mauvais signe pour un recruteur. Quand bien même ce serait le cas, évitez de le dire, car pour lui cela voudra dire que vous n’êtes pas curieux et ne voyez donc pas les changements et évolutions autour de vous, et que finalement vous ne vous souciez pas réellement de votre métier.
+
+Pour un recruteur, cela voudra dire qu’être développeur pour vous n’est juste qu’un travail comme un autre et pas une carrière.
+
+Ne pas se renseigner sur les produits proposés par l’entreprise
+Ce n’est peut-être pas éliminatoire, mais cela peut-être un sacré plus lors de votre entretien.
+
+Prenez le temps de bien étudier les produits/services offerts par l’entreprise à laquelle vous postulez car vous n’échapperez pas à la question “Que pensez-vous de nos produits? Comment on peut l’améliorer?”. Toutes les entreprises ont au moins un site web. La recherche est donc facile à faire et vous pourrez même suggérer des améliorations de la plateforme que l’entreprise utilise.
+
+Bien sûr vous pourrez vous en sortir sans les avoir étudiés mais vous en sortirez grandi si c’est le cas surtout si vous proposez des améliorations.
+
+Dénigrer ses anciens employeurs
+Peu importe à quel point votre ancien travail était mauvais, ne partagez jamais de critiques sur un employeur lors d’une entrevue. Si vous avez eu des expériences négatives, gardez votre ton neutre et partagez ce que vous avez appris de l’expérience et comment cela vous a aidé à vous guider tout au long de votre carrière. Ceci est particulièrement important lorsque vous parlez de la raison pour laquelle vous quittez votre poste actuel.
+
+Trop se projeter
+Une des lignes rouges à ne pas franchir lors d’un entretien est lorsqu’un développeur veut immédiatement aller de l’avant, que ce soit dans des projets ou des postes. Bien que l’ambition soit généralement une qualité positive, le responsable du recrutement remplit généralement un rôle très spécifique, et non le rôle que vous souhaitez dans trois ans. Concentrez-vous sur ce que vous pouvez apporter à l’entreprise maintenant et sur la manière dont vous pouvez répondre à ses besoins immédiats. Une fois recruté et votre tâche accomplie vous pourrez alors vous projeter.
