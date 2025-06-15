@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système de Reconnaissance Vocale avec GPT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .voice-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .voice-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .record-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .record-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .record-btn.recording {
+            background: linear-gradient(45deg, #ff4757, #c44569);
+            animation: pulse 1.5s infinite;
+        }
+
+        .stop-btn {
+            background: linear-gradient(45deg, #ffa726, #ff9800);
+            color: white;
+        }
+
+        .stop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 167, 38, 0.3);
+        }
+
+        .send-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .text-input-section {
+            margin-bottom: 30px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .status {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .status.idle {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status.recording {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status.processing {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .result-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .transcription {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+
+        .gpt-response {
+            background: #f0f8ff;
+            border-left: 4px solid #764ba2;
+        }
+
+        .result-section h3 {
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-section p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .processing-time {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .connection-status.connected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .connection-status.disconnected {
+            background: #f44336;
+            color: white;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .voice-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .voice-button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎤 Assistant Vocal Intelligent</h1>
+            <p>Parlez ou tapez votre question, et obtenez une réponse intelligente</p>
+        </div>
+
+        <div class="voice-controls">
+            <button class="voice-button record-btn" id="recordBtn">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                Enregistrer
+            </button>
+            
+            <button class="voice-button stop-btn" id="stopBtn" disabled>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z"/>
+                </svg>
+                Arrêter
+            </button>
+        </div>
+
+        <div class="text-input-section">
+            <textarea 
+                class="text-input" 
+                id="textInput" 
+                placeholder="Ou tapez votre question ici... (Ex: Quelle est la température le 10 janvier 1985 à Paris ?)"
+            ></textarea>
+            <br><br>
+            <button class="voice-button send-btn" id="sendTextBtn">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+                Envoyer le texte
+            </button>
+        </div>
+
+        <div class="status idle" id="status">
+            🟢 Prêt à écouter
+        </div>
+
+        <div class="results" id="results" style="display: none;">
+            <div class="result-section transcription">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    </svg>
+                    Transcription
+                </h3>
+                <p id="transcriptionText">-</p>
+            </div>
+            
+            <div class="result-section gpt-response">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v6l4-3 4 3v-6h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9.53c-.19.14-.38.25-.59.31-.21.06-.44.09-.69.09-.38 0-.72-.05-1.03-.16s-.57-.25-.79-.44-.39-.41-.51-.67-.18-.54-.18-.85c0-.31.06-.59.18-.85s.29-.48.51-.67.48-.33.79-.44.65-.16 1.03-.16c.25 0 .48.03.69.09s.4.17.59.31v-.95h.95v4.34h-.95v-.95z"/>
+                    </svg>
+                    Réponse de l'Assistant
+                </h3>
+                <p id="gptResponseText">-</p>
+            </div>
+            
+            <div class="processing-time" id="processingTime">
+                Temps de traitement: -
+            </div>
+        </div>
+    </div>
+
+    <div class="connection-status disconnected" id="connectionStatus">
+        🔴 Déconnecté
+    </div>
+
+    <script>
+        class VoiceRecognitionSystem {
+            constructor() {
+                this.websocket = null;
+                this.mediaRecorder = null;
+                this.audioChunks = [];
+                this.isRecording = false;
+                this.isConnected = false;
+                
+                this.initializeElements();
+                this.connectWebSocket();
+                this.setupEventListeners();
+            }
+            
+            initializeElements() {
+                this.recordBtn = document.getElementById('recordBtn');
+                this.stopBtn = document.getElementById('stopBtn');
+                this.sendTextBtn = document.getElementById('sendTextBtn');
+                this.textInput = document.getElementById('textInput');
+                this.status = document.getElementById('status');
+                this.results = document.getElementById('results');
+                this.transcriptionText = document.getElementById('transcriptionText');
+                this.gptResponseText = document.getElementById('gptResponseText');
+                this.processingTime = document.getElementById('processingTime');
+                this.connectionStatus = document.getElementById('connectionStatus');
+            }
+            
+            connectWebSocket() {
+                const wsUrl = `ws://${window.location.host}/voice-ws`;
+                this.websocket = new WebSocket(wsUrl);
+                
+                this.websocket.onopen = () => {
+                    this.isConnected = true;
+                    this.updateConnectionStatus();
+                    console.log('WebSocket connecté');
+                };
+                
+                this.websocket.onmessage = (event) => {
+                    const message = JSON.parse(event.data);
+                    this.handleWebSocketMessage(message);
+                };
+                
+                this.websocket.onclose = () => {
+                    this.isConnected = false;
+                    this.updateConnectionStatus();
+                    console.log('WebSocket fermé');
+                    
+                    // Tentative de reconnexion après 3 secondes
+                    setTimeout(() => this.connectWebSocket(), 3000);
+                };
+                
+                this.websocket.onerror = (error) => {
+                    console.error('Erreur WebSocket:', error);
+                    this.updateStatus('error', '❌ Erreur de connexion WebSocket');
+                };
+            }
+            
+            setupEventListeners() {
+                this.recordBtn.addEventListener('click', () => this.startRecording());
+                this.stopBtn.addEventListener('click', () => this.stopRecording());
+                this.sendTextBtn.addEventListener('click', () => this.sendText());
+                
+                // Envoyer le texte avec Entrée
+                this.textInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendText();
+                    }
+                });
+            }
+            
+            async startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ 
+                        audio: {
+                            sampleRate: 16000,
+                            channelCount: 1,
+                            echoCancellation: true,
+                            noiseSuppression: true
+                        } 
+                    });
+                    
+                    this.mediaRecorder = new MediaRecorder(stream, {
+                        mimeType: 'audio/webm;codecs=opus'
+                    });
+                    
+                    this.audioChunks
